@@ -1,12 +1,8 @@
 package com.examplemod;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
 import com.mumfrey.liteloader.PreRenderListener;
 import com.mumfrey.liteloader.Tickable;
 import com.mumfrey.liteloader.core.LiteLoader;
-import com.mumfrey.liteloader.modconfig.ConfigStrategy;
-import com.mumfrey.liteloader.modconfig.ExposableOptions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.settings.KeyBinding;
@@ -20,7 +16,6 @@ import java.io.File;
  *
  * @author Adam Mummery-Smith
  */
-@ExposableOptions(strategy = ConfigStrategy.Versioned, filename="examplemod.json")
 public class LiteModExample implements Tickable, PreRenderListener
 {
 	/**
@@ -35,13 +30,7 @@ public class LiteModExample implements Tickable, PreRenderListener
 	 */
 	private static KeyBinding clockKeyBinding = new KeyBinding("key.clock.toggle", Keyboard.KEY_F12, "key.categories.litemods");
 	
-	@Expose
-	@SerializedName("clock_size")
-	private int clockSize = 64;
-	
-	@Expose
-	@SerializedName("clock_visible")
-	private boolean clockVisible = true;
+	private ClockCloudConfig preferences = new ClockCloudConfig(this.clock);
 	
 	/**
 	 * Default constructor. All LiteMods must have a default constructor. In general you should do very little
@@ -88,8 +77,8 @@ public class LiteModExample implements Tickable, PreRenderListener
 		// a convenience method for this
 		LiteLoader.getInput().registerKeyBinding(LiteModExample.clockKeyBinding);
 		
-		this.clock.setSize(this.clockSize);
-		this.clock.setVisible(this.clockVisible);
+		this.clock.setSize(this.preferences.size);
+		this.clock.setVisible(this.preferences.visible);
 	}
 	
 	/**
@@ -113,14 +102,14 @@ public class LiteModExample implements Tickable, PreRenderListener
 			{
 				if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
 				{
-					this.clockSize = (this.clockSize << 1) & 0x1FF;
-					this.clock.setSize(this.clockSize);
-					this.clockSize = this.clock.getSize();
+					this.preferences.size = (this.preferences.size << 1) & 0x1FF;
+					this.clock.setSize(this.preferences.size);
+					this.preferences.size = this.clock.getSize();
 				}
 				else
 				{
 					this.clock.setVisible(!this.clock.isVisible());
-					this.clockVisible = this.clock.isVisible();
+					this.preferences.visible = this.clock.isVisible();
 				}
 				
 				// Our @Expose annotations control what properties get saved, this tells liteloader to
