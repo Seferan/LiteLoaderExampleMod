@@ -29,8 +29,8 @@ group = "com.mumfrey.examplemod" // http://maven.apache.org/guides/mini/guide-na
 archivesBaseName = "examplemod"
 
 minecraft {
-    version = "1.11"
-    mappings = "snapshot_20161124"
+    version = "1.11.2"
+    mappings = "snapshot_20161224"
     runDir = "run"
 }
 
@@ -48,7 +48,7 @@ mixin {
 litemod {
     json {
         name = "test"
-        mcversion = "1.11.r1"
+        mcversion = "1.11.r2"
         mixinConfigs += "mixins.example.json"
     }
 }
