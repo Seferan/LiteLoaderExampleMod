@@ -16,7 +16,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:' + project.forgeGradleVersion
         classpath 'org.spongepowered:mixingradle:0.4-SNAPSHOT'
     }
 }
@@ -24,35 +24,38 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.liteloader'
 apply plugin: 'org.spongepowered.mixin'
 
-version = "0.1"
 group = "com.mumfrey.examplemod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "examplemod"
 
 minecraft {
-    version = "1.11.2"
-    mappings = "snapshot_20161224"
+    // these values are defined in the gradle.properties file, so that this file does not need to be altered
+    version = project.mcVersion
+    mappings = project.mcMappings
     runDir = "run"
 }
 
 sourceSets {
     main {
         // Refmap declaration must match the refmap name specified in the json config
-        refMap = "mixins.example.refmap.json"
+        ext.refMap = "mixins.example.refmap.json"
     }
 }
 
 mixin {
+    // liteloader does not do runtime deobfuscation, so in production we use "notch names", mixin needs to know this
     defaultObfuscationEnv notch
 }
 
 litemod {
     json {
         name = "test"
-        mcversion = "1.11.r2"
+        mcversion = project.targetVersion
+        description = "An example litemod project which draws a clock in-game" 
         mixinConfigs += "mixins.example.json"
     }
 }
 
 jar {
+    // The litemod task above generates the litemod.json dynamically, you can replace it with a resource if you want more control
     from litemod.outputs
 }

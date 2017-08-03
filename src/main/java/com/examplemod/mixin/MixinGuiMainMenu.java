@@ -35,11 +35,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiMainMenu.class)
 public abstract class MixinGuiMainMenu extends GuiScreen
 {
-    @Shadow private int panoramaTimer;
+    @Shadow private float panoramaTimer;
 
-    @Inject(method = "updateScreen()V", at = @At("HEAD"))
-    private void onUpdateScreen(CallbackInfo ci)
+    @Inject(method = "drawScreen(IIF)V", at = @At("HEAD"))
+    private void onUpdateScreen(int mouseX, int mouseY, float partialTicks, CallbackInfo ci)
     {
-        this.panoramaTimer += 4;
+        this.panoramaTimer += partialTicks * 3;
     }
 }

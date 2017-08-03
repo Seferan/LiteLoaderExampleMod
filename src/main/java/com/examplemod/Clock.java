@@ -5,7 +5,7 @@ import static net.minecraft.client.renderer.vertex.DefaultVertexFormats.*;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.util.ReadableColor;
 
@@ -231,7 +231,7 @@ public class Clock
         // We use the tessellator rather than drawing individual quads because it uses vertex arrays to
         // draw the quads more efficiently.
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer worldRenderer = tessellator.getBuffer();
+		BufferBuilder worldRenderer = tessellator.getBuffer();
         worldRenderer.begin(GL_QUADS, POSITION_TEX);
         worldRenderer.pos(x + 0,     y + height, 0).tex(u  * texMapScale, v2 * texMapScale).endVertex();
         worldRenderer.pos(x + width, y + height, 0).tex(u2 * texMapScale, v2 * texMapScale).endVertex();
@@ -254,7 +254,7 @@ public class Clock
         
         // Draw the quad
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer worldRenderer = tessellator.getBuffer();
+		BufferBuilder worldRenderer = tessellator.getBuffer();
         worldRenderer.begin(GL_QUADS, POSITION);
         worldRenderer.pos(x1, y2, 0).endVertex();
         worldRenderer.pos(x2, y2, 0).endVertex();
