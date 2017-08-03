@@ -12,25 +12,29 @@ import org.lwjgl.util.ReadableColor;
 import java.util.Calendar;
 
 /**
- * Simple implementation of an analogue clock to demonstrate how to LiteLoader all the things 
+ * Simple implementation of an analogue clock to demonstrate how to LiteLoader
+ * all the things 
  *
  * @author Adam Mummery-Smith
  */
 public class Clock
 {
 	/**
-	 * This is the clock face resource, you need to create a resource location for any assets that you
-	 * wish to use. It is best to make these static to avoid new instances being created for every instance
-	 * of the referencing object, this also means they will only be garbage collected when the class is
-	 * garbage collected or when no instances of the class are left.
+	 * This is the clock face resource, you need to create a resource location
+	 * for any assets that you wish to use. It is best to make these static to
+	 * avoid new instances being created for every instance of the referencing
+	 * object, this also means they will only be garbage collected when the
+	 * class is garbage collected or when no instances of the class are left.
 	 * 
-	 * The first parameter for the resource location is the "domain" and this should normally be your mod's
-	 * name. The domain MUST be lower case! The second is the resource "path" and represents the path to the
-	 * resource within the domain. It is convention that the path always start with the resource type, such
-	 * as "textures" in this case.
+	 * <p>The first parameter for the resource location is the "domain" and this
+	 * should normally be your mod's name. The domain MUST be lower case! The
+	 * second is the resource "path" and represents the path to the resource
+	 * within the domain. It is convention that the path always start with the
+	 * resource type, such as "textures" in this case.</p>
 	 * 
-	 * Resources are always stored in a path of the form "assets/{domain}/{path}" which makes the appropriate
-	 * path to the CLOCKFACE resource: "/assets/example/textures/clock/face.png"
+	 * <p>Resources are always stored in a path of the form
+	 * "assets/{domain}/{path}" which makes the appropriate path to the
+	 * CLOCKFACE resource: "/assets/example/textures/clock/face.png"</p>
 	 */
 	private static final ResourceLocation CLOCKFACE = new ResourceLocation("example", "textures/clock/face.png");
 	
@@ -228,8 +232,8 @@ public class Clock
 
 		float texMapScale = 0.001953125F; // 512px
         
-        // We use the tessellator rather than drawing individual quads because it uses vertex arrays to
-        // draw the quads more efficiently.
+        // We use the tessellator rather than drawing individual quads because
+		// it uses vertex arrays to draw the quads more efficiently.
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder worldRenderer = tessellator.getBuffer();
         worldRenderer.begin(GL_QUADS, POSITION_TEX);

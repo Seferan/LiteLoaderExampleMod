@@ -7,9 +7,9 @@ import com.mumfrey.liteloader.modconfig.ConfigPanelHost;
 import net.minecraft.client.resources.I18n;
 
 /**
- * This is a simple example of adding a config panel to a mod. Your LiteMod class should implement
- * {@link Configurable} and return this class in order to support the settings functionality of the
- * mod panel.
+ * This is a simple example of adding a config panel to a mod. Your LiteMod
+ * class should implement {@link Configurable} and return this class in order to
+ * support the settings functionality of the mod panel.
  * 
  * @author Adam Mummery-Smith
  */
@@ -25,7 +25,8 @@ public class ExampleModConfigPanel extends AbstractConfigPanel
     }
     
     /* (non-Javadoc)
-     * @see com.mumfrey.liteloader.modconfig.AbstractConfigPanel#addOptions(com.mumfrey.liteloader.modconfig.ConfigPanelHost)
+     * @see com.mumfrey.liteloader.modconfig.AbstractConfigPanel#addOptions(
+     *      com.mumfrey.liteloader.modconfig.ConfigPanelHost)
      */
     @Override
     protected void addOptions(ConfigPanelHost host)
@@ -46,7 +47,8 @@ public class ExampleModConfigPanel extends AbstractConfigPanel
     @Override
     public void onPanelHidden()
     {
-        // This example applies the changes immediately, however you may wish to only save changes
-        // when the user clicks "save and close". In which case you should apply your changes here
+        // This example applies the changes immediately, however you may wish to
+        // only save changes when the user clicks "save and close". In which
+        // case you should apply your changes here
     }
 }

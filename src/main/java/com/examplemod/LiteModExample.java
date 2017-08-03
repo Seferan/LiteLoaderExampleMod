@@ -17,8 +17,9 @@ import org.lwjgl.input.Keyboard;
 import java.io.File;
 
 /**
- * This is a very simple example LiteMod, it draws an analogue clock on the minecraft HUD using
- * a traditional onTick hook supplied by LiteLoader's "Tickable" interface.
+ * This is a very simple example LiteMod, it draws an analogue clock on the
+ * minecraft HUD using a traditional onTick hook supplied by LiteLoader's
+ * {@link Tickable} interface.
  *
  * @author Adam Mummery-Smith
  */
@@ -31,9 +32,11 @@ public class LiteModExample implements Tickable, PreRenderListener, Configurable
 	private Clock clock = new Clock(10, 10);
 	
 	/**
-	 * This is a keybinding that we will register with the game and use to toggle the clock
+	 * This is a keybinding that we will register with the game and use to
+	 * toggle the clock
 	 * 
-	 * Notice that we specify the key name as an *unlocalised* string. The localisation is provided from the included resource file
+	 * Notice that we specify the key name as an *unlocalised* string. The
+	 * localisation is provided from the included resource file.
 	 */
 	private static KeyBinding clockKeyBinding = new KeyBinding("key.clock.toggle", Keyboard.KEY_F12, "key.categories.litemods");
 	
@@ -46,16 +49,18 @@ public class LiteModExample implements Tickable, PreRenderListener, Configurable
 	private boolean clockVisible = true;
 	
 	/**
-	 * Default constructor. All LiteMods must have a default constructor. In general you should do very little
-	 * in the mod constructor EXCEPT for initialising any non-game-interfacing components or performing
-	 * sanity checking prior to initialisation
+	 * Default constructor. All LiteMods must have a default constructor. In
+	 * general you should do very little in the mod constructor EXCEPT for
+	 * initialising any non-game-interfacing components or performing sanity
+	 * checking prior to initialisation
 	 */
 	public LiteModExample()
 	{
 	}
 	
 	/**
-	 * getName() should be used to return the display name of your mod and MUST NOT return null
+	 * getName() should be used to return the display name of your mod and MUST
+	 * NOT return null
 	 * 
 	 * @see com.mumfrey.liteloader.LiteMod#getName()
 	 */
@@ -66,8 +71,8 @@ public class LiteModExample implements Tickable, PreRenderListener, Configurable
 	}
 	
 	/**
-	 * getVersion() should return the same version string present in the mod metadata, although this is
-	 * not a strict requirement.
+	 * getVersion() should return the same version string present in the mod
+	 * metadata, although this is not a strict requirement.
 	 * 
 	 * @see com.mumfrey.liteloader.LiteMod#getVersion()
 	 */
@@ -84,16 +89,17 @@ public class LiteModExample implements Tickable, PreRenderListener, Configurable
 	}
 	
 	/**
-	 * init() is called very early in the initialisation cycle, before the game is fully initialised, this
-	 * means that it is important that your mod does not interact with the game in any way at this point.
+	 * init() is called very early in the initialisation cycle, before the game
+	 * is fully initialised, this means that it is important that your mod does
+	 * not interact with the game in any way at this point.
 	 * 
 	 * @see com.mumfrey.liteloader.LiteMod#init(java.io.File)
 	 */
 	@Override
 	public void init(File configPath)
 	{
-		// The key binding declared above won't do anything unless we register it, ModUtilties provides 
-		// a convenience method for this
+		// The key binding declared above won't do anything unless we register
+	    // it, LiteLoader's Input manager provides a convenience method for this
 		LiteLoader.getInput().registerKeyBinding(LiteModExample.clockKeyBinding);
 		
 		this.clock.setSize(this.clockSize);
@@ -101,9 +107,11 @@ public class LiteModExample implements Tickable, PreRenderListener, Configurable
 	}
 	
 	/**
-	 * upgradeSettings is used to notify a mod that its version-specific settings are being migrated
+	 * upgradeSettings is used to notify a mod that its version-specific
+	 * settings are being migrated
 	 * 
-	 * @see com.mumfrey.liteloader.LiteMod#upgradeSettings(java.lang.String, java.io.File, java.io.File)
+	 * @see com.mumfrey.liteloader.LiteMod#upgradeSettings(java.lang.String,
+	 *         java.io.File, java.io.File)
 	 */
 	@Override
 	public void upgradeSettings(String version, File configPath, File oldConfigPath)
@@ -113,8 +121,9 @@ public class LiteModExample implements Tickable, PreRenderListener, Configurable
 	@Override
 	public void onTick(Minecraft minecraft, float partialTicks, boolean inGame, boolean clock)
 	{
-		// The three checks here are critical to ensure that we only draw the clock as part of the "HUD"
-		// and don't draw it over active GUI's or other elements
+		// The three checks here are critical to ensure that we only draw the
+	    // clock as part of the "HUD" and don't draw it over active GUI's or
+	    // other elements
 		if (inGame && minecraft.currentScreen == null && Minecraft.isGuiEnabled())
 		{
 			if (LiteModExample.clockKeyBinding.isPressed())
@@ -131,8 +140,8 @@ public class LiteModExample implements Tickable, PreRenderListener, Configurable
 					this.clockVisible = this.clock.isVisible();
 				}
 				
-				// Our @Expose annotations control what properties get saved, this tells liteloader to
-				// actually write the properties to disk
+				// Our @Expose annotations control what properties get saved,
+				// this tells liteloader to actually write properties to disk
 				LiteLoader.getInstance().writeConfig(this);
 			}
 			
