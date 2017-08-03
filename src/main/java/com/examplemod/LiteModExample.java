@@ -3,14 +3,12 @@ package com.examplemod;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.mumfrey.liteloader.Configurable;
-import com.mumfrey.liteloader.PreRenderListener;
 import com.mumfrey.liteloader.Tickable;
 import com.mumfrey.liteloader.core.LiteLoader;
 import com.mumfrey.liteloader.modconfig.ConfigPanel;
 import com.mumfrey.liteloader.modconfig.ConfigStrategy;
 import com.mumfrey.liteloader.modconfig.ExposableOptions;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.settings.KeyBinding;
 import org.lwjgl.input.Keyboard;
 
@@ -24,7 +22,7 @@ import java.io.File;
  * @author Adam Mummery-Smith
  */
 @ExposableOptions(strategy = ConfigStrategy.Versioned, filename="examplemod.json")
-public class LiteModExample implements Tickable, PreRenderListener, Configurable
+public class LiteModExample implements Tickable, Configurable
 {
     /**
      * This is our instance of Clock which we will draw every tick
@@ -158,35 +156,5 @@ public class LiteModExample implements Tickable, PreRenderListener, Configurable
     void setClockVisibility(boolean visible)
     {
         this.clock.setVisible(this.clockVisible = visible);
-    }
-    
-    @Override
-    public void onRenderWorld(float partialTicks)
-    {
-//		System.err.printf(">> onRenderWorld!\n");
-    }
-    
-    @Override
-    public void onSetupCameraTransform(float partialTicks, int pass, long timeSlice)
-    {
-//		System.err.printf(">> onSetupCameraTransform %s, %d, %d!\n", partialTicks, pass, timeSlice);
-    }
-    
-    @Override
-    public void onRenderSky(float partialTicks, int pass)
-    {
-//		System.err.printf(">> onRenderSky %s, %d!\n", partialTicks, pass);
-    }
-    
-    @Override
-    public void onRenderClouds(float partialTicks, int pass, RenderGlobal renderGlobal)
-    {
-//		System.err.printf(">> onRenderClouds %s, %d!\n", partialTicks, pass);
-    }
-    
-    @Override
-    public void onRenderTerrain(float partialTicks, int pass)
-    {
-//		System.err.printf(">> onRenderTerrain %s, %d!\n", partialTicks, pass);
     }
 }
